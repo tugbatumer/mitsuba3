@@ -1,0 +1,10 @@
+LICENSE
+README.md
+pyproject.toml
+setup.py
+mitsuba.egg-info/PKG-INFO
+mitsuba.egg-info/SOURCES.txt
+mitsuba.egg-info/dependency_links.txt
+mitsuba.egg-info/entry_points.txt
+mitsuba.egg-info/requires.txt
+mitsuba.egg-info/top_level.txt

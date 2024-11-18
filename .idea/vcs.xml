@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/asmjit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/drjit" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/drjit/ext/drjit-core" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/drjit/ext/drjit-core/ext/nanothread" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/drjit/ext/drjit-core/ext/nanothread/ext/cmake-defaults" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/drjit/ext/drjit-core/ext/robin_map" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/drjit/ext/nanobind" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/drjit/ext/nanobind/ext/robin_map" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/embree" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/fastfloat" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/ittnotify" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/libjpeg" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/libpng" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/nanobind" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/nanobind/ext/robin_map" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/nanogui" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/nanogui/ext/glfw" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/nanogui/ext/nanovg" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/nanogui/ext/nanovg_metal" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/nanogui/ext/pybind11" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/openexr" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/pugixml" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/tinyformat" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/ext/zlib" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/resources/data" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/tutorials" vcs="Git" />
+  </component>
+</project>
