@@ -46,7 +46,7 @@ class ADIntegrator(mi.CppADIntegrator):
     def render(self: mi.SamplingIntegrator,
                scene: mi.Scene,
                sensor: Union[int, mi.Sensor] = 0,
-               seed: int = 0,
+               seed: mi.UInt32 = 0,
                spp: int = 0,
                develop: bool = True,
                evaluate: bool = True) -> mi.TensorXf:
@@ -103,7 +103,6 @@ class ADIntegrator(mi.CppADIntegrator):
 
             # Explicitly delete any remaining unused variables
             del sampler, ray, weight, pos, L, valid
-            gc.collect()
 
             # Perform the weight division and return an image tensor
             film.put_block(block)
@@ -114,7 +113,7 @@ class ADIntegrator(mi.CppADIntegrator):
                        scene: mi.Scene,
                        params: Any,
                        sensor: Union[int, mi.Sensor] = 0,
-                       seed: int = 0,
+                       seed: mi.UInt32 = 0,
                        spp: int = 0) -> mi.TensorXf:
 
         if isinstance(sensor, int):
@@ -167,7 +166,7 @@ class ADIntegrator(mi.CppADIntegrator):
                         params: Any,
                         grad_in: mi.TensorXf,
                         sensor: Union[int, mi.Sensor] = 0,
-                        seed: int = 0,
+                        seed: mi.UInt32 = 0,
                         spp: int = 0) -> None:
 
         if isinstance(sensor, int):
@@ -212,7 +211,6 @@ class ADIntegrator(mi.CppADIntegrator):
                 film.put_block(block)
 
                 del valid
-                gc.collect()
 
                 # This step launches a kernel
                 dr.schedule(block.tensor())
@@ -226,7 +224,6 @@ class ADIntegrator(mi.CppADIntegrator):
 
             # We don't need any of the outputs here
             del ray, weight, pos, block, sampler
-            gc.collect()
 
             # Run kernel representing side effects of the above
             dr.eval()
@@ -313,7 +310,7 @@ class ADIntegrator(mi.CppADIntegrator):
 
     def prepare(self,
                 sensor: mi.Sensor,
-                seed: int = 0,
+                seed: mi.UInt32 = 0,
                 spp: int = 0,
                 aovs: list = []):
         """
@@ -499,7 +496,7 @@ class RBIntegrator(ADIntegrator):
                        scene: mi.Scene,
                        params: Any,
                        sensor: Union[int, mi.Sensor] = 0,
-                       seed: int = 0,
+                       seed: mi.UInt32 = 0,
                        spp: int = 0) -> mi.TensorXf:
         """
         Evaluates the forward-mode derivative of the rendering step.
@@ -619,11 +616,6 @@ class RBIntegrator(ADIntegrator):
             del sampler, ray, weight, pos, L, valid, aovs, δL, δaovs, \
                 valid_2, params, state_out, state_out_2, block
 
-            # Probably a little overkill, but why not.. If there are any
-            # DrJit arrays to be collected by Python's cyclic GC, then
-            # freeing them may enable loop simplifications in dr.eval().
-            gc.collect()
-
             result_grad = film.develop()
 
         return result_grad
@@ -633,7 +625,7 @@ class RBIntegrator(ADIntegrator):
                         params: Any,
                         grad_in: mi.TensorXf,
                         sensor: Union[int, mi.Sensor] = 0,
-                        seed: int = 0,
+                        seed: mi.UInt32 = 0,
                         spp: int = 0) -> None:
         """
         Evaluates the reverse-mode derivative of the rendering step.
@@ -725,11 +717,6 @@ class RBIntegrator(ADIntegrator):
 
                 film.put_block(block)
 
-                # Probably a little overkill, but why not.. If there are any
-                # DrJit arrays to be collected by Python's cyclic GC, then
-                # freeing them may enable loop simplifications in dr.eval().
-                gc.collect()
-
                 image = film.develop()
 
                 dr.set_grad(image, grad_in)
@@ -790,7 +777,6 @@ class RBIntegrator(ADIntegrator):
             del L_2, valid_2, aovs_2, state_out, state_out_2, \
                 δL, δaovs, ray, weight, pos, sampler
 
-            gc.collect()
 
             # Run kernel representing side effects of the above
             dr.eval()
@@ -916,7 +902,7 @@ class PSIntegrator(ADIntegrator):
     def render_ad(self,
                   scene: mi.Scene,
                   sensor: Union[int, mi.Sensor],
-                  seed: int,
+                  seed: mi.UInt32,
                   spp: int,
                   mode: dr.ADMode) -> mi.TensorXf:
         """
@@ -1015,7 +1001,7 @@ class PSIntegrator(ADIntegrator):
                        scene: mi.Scene,
                        params: Any,
                        sensor: Union[int, mi.Sensor] = 0,
-                       seed: int = 0,
+                       seed: mi.UInt32 = 0,
                        spp: int = 0) -> mi.TensorXf:
         if isinstance(sensor, int):
             sensor = scene.sensors()[sensor]
@@ -1058,7 +1044,7 @@ class PSIntegrator(ADIntegrator):
                         params: Any,
                         grad_in: mi.TensorXf,
                         sensor: Union[int, mi.Sensor] = 0,
-                        seed: int = 0,
+                        seed: mi.UInt32 = 0,
                         spp: int = 0) -> None:
         if isinstance(sensor, int):
             sensor = scene.sensors()[sensor]

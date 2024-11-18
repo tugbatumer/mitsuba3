@@ -240,7 +240,7 @@ class ProjectiveDetail():
     def init_indirect_silhouette(self,
                                  scene: mi.Scene,
                                  sensor: mi.Sensor,
-                                 seed: int):
+                                 seed: mi.UInt32):
         """
         Initialize the guiding structure for indirect discontinuous derivatives
         based on the guiding mode. The result is stored in this python class.
@@ -269,12 +269,6 @@ class ProjectiveDetail():
         elif parent.guiding == 'octree':
             self.init_indirect_silhouette_octree(scene, sensor, seed)
 
-        # After cleaning up, only necessary guiding distribution storage should
-        # exist in the device memory. This usually occupies dozens of MBs for
-        # octree, and ~0.75GB for grid based guiding with default settings.
-        gc.collect()
-        gc.collect()
-        # TODO this should happen automatically
 
     @dr.syntax
     def init_indirect_silhouette_grid_unif(self, scene, sensor, seed):

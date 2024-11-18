@@ -22,12 +22,16 @@ alt="Mitsuba banner">
 [11]: https://img.shields.io/pypi/v/mitsuba.svg?color=green
 [12]: https://pypi.org/pypi/mitsuba
 
-## Warning
+## :warning: Warning :warning:
 
 There currently is a large amount of undocumented and unstable work going on in
 the ``master`` branch. We'd highly recommend you use our
 [latest release](https://github.com/mitsuba-renderer/mitsuba3/tree/v3.5.2)
 until further notice.
+
+If you already want to try out the upcoming changes, please have a look at
+[this porting guide](https://mitsuba.readthedocs.io/en/latest/porting_3_6.html).
+It should cover most of the new features and breaking changes that are coming.
 
 ## Introduction
 
@@ -83,12 +87,21 @@ We provide pre-compiled binary wheels via PyPI. Installing Mitsuba this way is a
 pip install mitsuba
 ```
 
-on the command line. The Python package includes four variants by default:
+on the command line. The Python package includes thirteen variants by default:
 
-- ``scalar_spectral``
 - ``scalar_rgb``
+- ``scalar_spectral``
+- ``scalar_spectral_polarized``
 - ``llvm_ad_rgb``
+- ``llvm_ad_mono``
+- ``llvm_ad_mono_polarized``
+- ``llvm_ad_spectral``
+- ``llvm_ad_spectral_polarized``
 - ``cuda_ad_rgb``
+- ``cuda_ad_mono``
+- ``cuda_ad_mono_polarized``
+- ``cuda_ad_spectral``
+- ``cuda_ad_spectral_polarized``
 
 The first two perform classic one-ray-at-a-time simulation using either a RGB
 or spectral color representation, while the latter two can be used for inverse

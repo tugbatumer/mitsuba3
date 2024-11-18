@@ -379,7 +379,7 @@ def render(scene: mi.Scene,
            params: Any = None,
            sensor: Union[int, mi.Sensor] = 0,
            integrator: mi.Integrator = None,
-           seed: int = 0,
+           seed: mi.UInt32 = 0,
            seed_grad: int = 0,
            spp: int = 0,
            spp_grad: int = 0) -> mi.TensorXf:
@@ -433,14 +433,14 @@ def render(scene: mi.Scene,
         default, the integrator specified in the original scene description will
         be used.
 
-    Parameter ``seed`` (``int``)
+    Parameter ``seed`` (``mi.UInt32``)
         This parameter controls the initialization of the random number
         generator during the primal rendering step. It is crucial that you
         specify different seeds (e.g., an increasing sequence) if subsequent
         calls should produce statistically independent images (e.g. to
         de-correlate gradient-based optimization steps).
 
-    Parameter ``seed_grad`` (``int``)
+    Parameter ``seed_grad`` (``mi.UInt32``)
         This parameter is analogous to the ``seed`` parameter but targets the
         differential simulation phase. If not specified, the implementation will
         automatically compute a suitable value from the primal ``seed``.
@@ -592,24 +592,21 @@ def cornell_box():
             'type': 'diffuse',
             'reflectance': {
                 'type': 'rgb',
-                #'value': mi.ScalarColor3f([0.885809, 0.698859, 0.666422]),
-                'value': mi.ScalarColor3d(0.885809, 0.698859, 0.666422),
+                'value': [0.885809, 0.698859, 0.666422],
             }
         },
         'green': {
             'type': 'diffuse',
             'reflectance': {
                 'type': 'rgb',
-                #'value': [0.105421, 0.37798, 0.076425],
-                'value': mi.ScalarColor3d(0.105421, 0.37798, 0.076425),
+                'value': [0.105421, 0.37798, 0.076425],
             }
         },
         'red': {
             'type': 'diffuse',
             'reflectance': {
                 'type': 'rgb',
-                #'value': [0.570068, 0.0430135, 0.0443706],
-                'value': mi.ScalarColor3d(0.570068, 0.0430135, 0.0443706),
+                'value': [0.570068, 0.0430135, 0.0443706],
             }
         },
         # -------------------- Light --------------------
@@ -624,8 +621,7 @@ def cornell_box():
                 'type': 'area',
                 'radiance': {
                     'type': 'rgb',
-                    #'value': [18.387, 13.9873, 6.75357],
-                    'value': mi.ScalarColor3d(18.387, 13.9873, 6.75357),
+                    'value': [18.387, 13.9873, 6.75357],
                 }
             }
         },
@@ -704,3 +700,5 @@ def variant_context(*args) -> None:
         raise
     finally:
         mi.set_variant(old_variant)
+
+scoped_set_variant = variant_context
